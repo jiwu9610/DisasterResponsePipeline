@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Meta settings -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Page title -->
+    <title>Disaster Response Project</title>
+
+    <!-- Bootstrap CSS and custom stylesheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    
+    <!-- jQuery and Plotly.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Disaster Response Project</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="https://www.udacity.com/">Udacity</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://github.com/">GitHub</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Main content -->
+<div class="container mt-5">
+    <h1 class="display-4 text-center">Disaster Response Analysis</h1>
+    <p class="lead text-center mb-4">Classify messages and assist in disaster responses.</p>
+    
+    <div class="text-center">
+        <form action="/go" method="get" class="form-inline d-flex justify-content-center">
+            <input type="text" class="form-control mb-2 mr-sm-2" name="query" placeholder="Enter a message...">
+            <button type="submit" class="btn btn-primary mb-2">Classify</button>
+        </form>
+    </div>
+
+    {% block message %}
+    {% endblock %}
+    
+    <hr>
+
+    {% block content %}
+    <!-- Default content (can be overridden) -->
+    <div class="alert alert-info" role="alert">
+        Please enter a message above to see classification results.
+    </div>
+    {% endblock %}
+    
+    <div id="visuals">
+        {% for id in ids %}
+        <div id="{{id}}" class="my-4"></div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- JavaScript to render Plotly graphs -->
+<script>
+    const graphs = {{graphJSON | safe}};
+    const ids = {{ids | safe}};
+    for(let i in graphs) {
+        Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
+    }
+</script>
+
+</body>
+</html>
