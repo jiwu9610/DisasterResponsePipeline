@@ -42,4 +42,4 @@ cd app python run.py
 The machine learning model is trained on the provided dataset and can classify disaster response messages into different categories. The web app provides a user-friendly interface to input messages and view the classification results.
 
 ## Licensing, Authors, and Acknowledgements
-This project is licensed under the MIT License. The dataset used in this project is provided by Figure Eight and the initial code template is provided by Udacity.
+This project is licensed under the MIT License. The dataset used in this project is provided by Figure Eight.
